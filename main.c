@@ -201,6 +201,21 @@ void triRapideMoyenne(Etudiant tab[], int debut, int fin)
     }
 }
 
+void triInsertionAlphabetique(Etudiant tab[], int taille)
+{
+    for (int i = 1; i < taille; i++)
+    {
+        Etudiant temp = tab[i];
+        int j = i - 1;
+        while (j >= 0 && strcmp(tab[j].nom, temp.nom) > 0)
+        {
+            tab[j + 1] = tab[j];
+            j--;
+        }
+        tab[j + 1] = temp;
+    }
+}
+
 
 int main()
 {
@@ -233,6 +248,10 @@ int main()
     
     printf("Tri par moyenne :\n");
     triRapideMoyenne(tabEtud, 0, tailleEtud - 1);
+    afficherTabEtudiant(tabEtud, tailleEtud);
+
+    printf("\nTri par nom :\n");
+    triInsertionAlphabetique(tabEtud, tailleEtud);
     afficherTabEtudiant(tabEtud, tailleEtud);
 
 
