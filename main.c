@@ -12,6 +12,23 @@ typedef struct
     int stock_restant;
 } Medicament;
 
+typedef struct
+{
+    char nom[30];
+    int code;
+    int date_fabrication;
+    int date_peremption;
+    float prix;
+    int nbr_vendue;
+    int stock_restant;
+    struct Medicament2 *suivant;
+} Medicament2;
+
+typedef struct
+{
+    Medicament2 *premier;
+} L;
+
 void afficherTab(Medicament tab[], int taille)
 {
     for (int i = 0; i < taille; i++)
@@ -120,11 +137,18 @@ void afficheMedicamentPlusCher(Medicament tab[], int taille)
 int medicamentsVendus(Medicament tab[], int taille)
 {
     int tot = 0;
-    for (int i = 0; i<taille; i++)
+    for (int i = 0; i < taille; i++)
     {
         tot += tab[i].nbr_vendue;
     }
     return tot;
+}
+
+void triCodeListeChainee(L liste)
+{
+    Medicament2 *actuel = liste.premier;
+    Medicament2 *suivant = NULL;
+    Medicament2 *precedent = NULL;
 }
 
 int main()
