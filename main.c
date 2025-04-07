@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 typedef struct
 {
@@ -72,14 +73,42 @@ void triPeremptionBulle(Medicament tab[], int taille)
     }
 }
 
+void rechercheMedicamentDichotomie(Medicament tab[], int taille, char nom[])
+{
+    int debut = 0;
+    int fin = taille - 1;
+    int milieu;
+
+    while (debut <= fin)
+    {
+        milieu = (debut + fin) / 2;
+        if (strcmp(tab[milieu].nom, nom) == 0)
+        {
+            printf("Medicament trouve : %s, numero : %d\n", tab[milieu].nom, milieu + 1);
+            return;
+        }
+        else if (strcmp(tab[milieu].nom, nom) < 0)
+        {
+            debut = milieu + 1;
+        }
+        else
+        {
+            fin = milieu - 1;
+        }
+    }
+    printf("Medicament non trouve.\n");
+}
+
 int main()
 {
     Medicament tab[4];
     int taille = 4;
 
     printf("Tri par date de peremption :\n");
-    triPeremptionBulle(tab, 4);
+    triPeremptionBulle(tab, taille);
     afficherTab(tab, taille);
+
+    rechercheMedicamentDichotomie(tab, taille, "paracetamol");
 
     return 0;
 }
