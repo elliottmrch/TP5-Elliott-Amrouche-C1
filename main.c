@@ -117,6 +117,16 @@ void afficheMedicamentPlusCher(Medicament tab[], int taille)
     }
 }
 
+int medicamentsVendus(Medicament tab[], int taille)
+{
+    int tot = 0;
+    for (int i = 0; i<taille; i++)
+    {
+        tot += tab[i].nbr_vendue;
+    }
+    return tot;
+}
+
 int main()
 {
     Medicament tab[4];
@@ -129,6 +139,9 @@ int main()
     rechercheMedicamentDichotomie(tab, taille, "paracetamol");
 
     afficheMedicamentPlusCher(tab, taille);
+
+    int nbr_vendus = medicamentsVendus(tab, taille);
+    printf("Le brave pharmacien a vendu %d medicaments\n", nbr_vendus);
 
     return 0;
 }
