@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+//EX1
+
 typedef struct
 {
     char nom[30];
@@ -151,8 +153,24 @@ void triCodeListeChainee(L liste)
     Medicament2 *precedent = NULL;
 }
 
+
+
+//EX2
+
+typedef struct
+{
+    char nom[30];
+    char prenom[30];
+    int matricule;
+    int moyenne;
+} Etudiant;
+
+
+
+
 int main()
 {
+    //EX1
     Medicament tab[4];
     int taille = 4;
 
@@ -166,6 +184,10 @@ int main()
 
     int nbr_vendus = medicamentsVendus(tab, taille);
     printf("Le brave pharmacien a vendu %d medicaments\n", nbr_vendus);
+
+
+    //EX2
+
 
     return 0;
 }
