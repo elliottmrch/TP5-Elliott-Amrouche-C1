@@ -165,28 +165,75 @@ typedef struct
     int moyenne;
 } Etudiant;
 
+void afficherTabEtudiant(Etudiant tab[], int taille)
+{
+    for (int i = 0; i < taille; i++)
+    {
+        printf("Etudiant %d :\n", i + 1);
+        printf("Nom : %s  ", tab[i].nom);
+        printf("Prenom : %s  ", tab[i].prenom);
+        printf("Matricule : %d  ", tab[i].matricule);
+        printf("Moyenne : %d\n", tab[i].moyenne);
+    }
+}
 
+void triRapideMoyenne(Etudiant tab[], int debut, int fin)
+{
+    if (debut < fin)
+    {
+        int pivot = tab[fin].moyenne;
+        int i = debut - 1;
+        for (int j = debut; j < fin; j++)
+        {
+            if (tab[j].moyenne <= pivot)
+            {
+                i++;
+                Etudiant temp = tab[i];
+                tab[i] = tab[j];
+                tab[j] = temp;
+            }
+        }
+        Etudiant temp = tab[i + 1];
+        tab[i + 1] = tab[fin];
+        tab[fin] = temp;
+        triRapideMoyenne(tab, debut, i);
+        triRapideMoyenne(tab, i + 2, fin);
+    }
+}
 
 
 int main()
 {
     //EX1
-    Medicament tab[4];
-    int taille = 4;
+    // Medicament tab[4];
+    // int taille = 4;
 
-    printf("Tri par date de peremption :\n");
-    triPeremptionBulle(tab, taille);
-    afficherTab(tab, taille);
+    // printf("Tri par date de peremption :\n");
+    // triPeremptionBulle(tab, taille);
+    // afficherTab(tab, taille);
 
-    rechercheMedicamentDichotomie(tab, taille, "paracetamol");
+    // rechercheMedicamentDichotomie(tab, taille, "paracetamol");
 
-    afficheMedicamentPlusCher(tab, taille);
+    // afficheMedicamentPlusCher(tab, taille);
 
-    int nbr_vendus = medicamentsVendus(tab, taille);
-    printf("Le brave pharmacien a vendu %d medicaments\n", nbr_vendus);
+    // int nbr_vendus = medicamentsVendus(tab, taille);
+    // printf("Le brave pharmacien a vendu %d medicaments\n", nbr_vendus);
 
 
     //EX2
+
+    Etudiant tabEtud[6] = {
+        {"Ali", "Ahmed", 123, 15},
+        {"Sara", "Ali", 124, 18},
+        {"Omar", "Hassan", 125, 12},
+        {"Laila", "Mohamed", 126, 20},
+        {"Zainab", "Ali", 127, 17},
+        {"Youssef", "Ahmed", 128, 14}};
+    int tailleEtud = 6;
+    
+    printf("Tri par moyenne :\n");
+    triRapideMoyenne(tabEtud, 0, tailleEtud - 1);
+    afficherTabEtudiant(tabEtud, tailleEtud);
 
 
     return 0;
