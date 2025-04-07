@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 //EX1
@@ -31,7 +32,7 @@ typedef struct
     Medicament2 *premier;
 } L;
 
-void afficherTab(Medicament tab[], int taille)
+void afficherTabMed(Medicament tab[], int taille)
 {
     for (int i = 0; i < taille; i++)
     {
@@ -154,7 +155,6 @@ void triCodeListeChainee(L liste)
 }
 
 
-
 //EX2
 
 typedef struct
@@ -217,15 +217,59 @@ void triInsertionAlphabetique(Etudiant tab[], int taille)
 }
 
 
+//EX3
+
+void triFusion(int tab1[], int tab2[], int taille1, int taille2, int tabFusion[])
+{
+    int i = 0, j = 0, k = 0;
+    while (i < taille1 && j < taille2)
+    {
+        if (tab1[i] < tab2[j])
+        {
+            tabFusion[k] = tab1[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            tabFusion[k] = tab2[j];
+            k++;
+            j++;
+        }
+    }
+    while (i < taille1)
+    {
+        tabFusion[k] = tab1[i];
+        k++;
+        i++;
+    }
+    while (j < taille2)
+    {
+        tabFusion[k] = tab2[j];
+        k++;
+        j++;
+    }
+}
+
+void afficherTab(int tab[], int taille)
+{
+    for (int i = 0; i < taille; i++)
+    {
+        printf("%d ", tab[i]);
+    }
+    printf("\n");
+}
+
 int main()
 {
     //EX1
+    
     // Medicament tab[4];
     // int taille = 4;
 
     // printf("Tri par date de peremption :\n");
     // triPeremptionBulle(tab, taille);
-    // afficherTab(tab, taille);
+    // afficherTabMed(tab, taille);
 
     // rechercheMedicamentDichotomie(tab, taille, "paracetamol");
 
@@ -237,23 +281,40 @@ int main()
 
     //EX2
 
-    Etudiant tabEtud[6] = {
-        {"Ali", "Ahmed", 123, 15},
-        {"Sara", "Ali", 124, 18},
-        {"Omar", "Hassan", 125, 12},
-        {"Laila", "Mohamed", 126, 20},
-        {"Zainab", "Ali", 127, 17},
-        {"Youssef", "Ahmed", 128, 14}};
-    int tailleEtud = 6;
+    // Etudiant tabEtud[6] = {
+    //     {"Ali", "Ahmed", 123, 15},
+    //     {"Sara", "Ali", 124, 18},
+    //     {"Omar", "Hassan", 125, 12},
+    //     {"Laila", "Mohamed", 126, 20},
+    //     {"Zainab", "Ali", 127, 17},
+    //     {"Youssef", "Ahmed", 128, 14}};
+    // int tailleEtud = 6;
     
-    printf("Tri par moyenne :\n");
-    triRapideMoyenne(tabEtud, 0, tailleEtud - 1);
-    afficherTabEtudiant(tabEtud, tailleEtud);
+    // printf("Tri par moyenne :\n");
+    // triRapideMoyenne(tabEtud, 0, tailleEtud - 1);
+    // afficherTabEtudiant(tabEtud, tailleEtud);
 
-    printf("\nTri par nom :\n");
-    triInsertionAlphabetique(tabEtud, tailleEtud);
-    afficherTabEtudiant(tabEtud, tailleEtud);
+    // printf("\nTri par nom :\n");
+    // triInsertionAlphabetique(tabEtud, tailleEtud);
+    // afficherTabEtudiant(tabEtud, tailleEtud);
 
+
+    //EX3
+
+    int tab1[10] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+    int tab2[10] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+    int taille1 = 10;
+    int taille2 = 10;
+
+    int tabFusion[20];
+    triFusion(tab1, tab2, taille1, taille2, tabFusion);
+
+    printf("Tableau 1 : ");
+    afficherTab(tab1, taille1);
+    printf("Tableau 2 : ");
+    afficherTab(tab2, taille2);
+    printf("Tableau fusionne : ");
+    afficherTab(tabFusion, taille1 + taille2);
 
     return 0;
 }
