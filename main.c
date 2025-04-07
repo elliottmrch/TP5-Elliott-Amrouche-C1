@@ -21,7 +21,7 @@ void afficherTab(Medicament tab[], int taille)
         printf("Code : %d  ", tab[i].code);
         printf("Date fabrication : %d  ", tab[i].date_fabrication);
         printf("Date peremption : %d  ", tab[i].date_peremption);
-        printf("Prix : %0.2f  ", tab[i].prix);
+        printf("Prix : %.2f  ", tab[i].prix);
         printf("Nombre vendu : %d  ", tab[i].nbr_vendue);
         printf("Stock restant : %d\n", tab[i].stock_restant);
     }
@@ -99,6 +99,24 @@ void rechercheMedicamentDichotomie(Medicament tab[], int taille, char nom[])
     printf("Medicament non trouve.\n");
 }
 
+void afficheMedicamentPlusCher(Medicament tab[], int taille)
+{
+    float max = 0;
+    int index = -1;
+    for (int i = 0; i < taille; i++)
+    {
+        if (tab[i].prix > max)
+        {
+            max = tab[i].prix;
+            index = i;
+        }
+    }
+    if (index != -1)
+    {
+        printf("Le medicament le plus cher est : %s, numero : %d \n", tab[index].nom, index + 1);
+    }
+}
+
 int main()
 {
     Medicament tab[4];
@@ -109,6 +127,8 @@ int main()
     afficherTab(tab, taille);
 
     rechercheMedicamentDichotomie(tab, taille, "paracetamol");
+
+    afficheMedicamentPlusCher(tab, taille);
 
     return 0;
 }
